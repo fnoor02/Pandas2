@@ -1,0 +1,17 @@
+Problem 1 : Article Views I
+
+def article_views(views: pd.DataFrame) -> pd.DataFrame:
+    df = views[views['author_id'] == views['viewer_id']]
+    df = df.drop_duplicates(subset = ['author_id'], inplace = False)
+    df = df[['author_id']]
+    df.sort_values(by = ['author_id'], inplace = True)
+    df = df.rename(columns = {'author_id' : 'id'})
+    return df
+
+
+Problem 2 :Invalid Tweets
+
+def invalid_tweets(tweets: pd.DataFrame) -> pd.DataFrame:
+    is_valid = tweets['content'].str.len() > 15
+    df = tweets[is_valid]
+    return df[['tweet_id']]
